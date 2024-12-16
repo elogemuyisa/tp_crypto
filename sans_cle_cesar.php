@@ -67,19 +67,8 @@ function crack_caesar($ciphertext, $french_letter_freq, $top_n = 5) {
 // Exemple d'utilisation
 $ciphertext = $message; // Exemple de texte chiffré
 $results = crack_caesar($ciphertext, $french_letter_freq);
-if($message!="")
-{
 
 
-echo "Les 5 déchiffrements les plus probables sont :\n";
-foreach ($results as $i => $result) {
-    echo ($i + 1) . ". Texte: " . $result['text'] . " (Décalage: " . $result['shift'] . ", Score: " . round($result['score'], 4) . ")\n";
-}
-}
-else
-{
-    echo "Veiller d'abord entrer le message";
-}
 
 }
 ?>
@@ -92,12 +81,13 @@ else
     <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="col-6">
+<div class="col-4 offset-1 mt-5">
+        <h5 class="text-center">Déchiffrement avec Cesar</h5>
         <form action="" method="post">
             <div class="mb-3">
                 <label for="" class="form-label">Message</label>
                 <input type="text"
-                    class="form-control" name="message" id="" aria-describedby="helpId" placeholder="">
+                    class="form-control" name="message" id="" aria-describedby="helpId" placeholder="" required>
             </div>
             
             <div class="mb-3">
@@ -106,6 +96,18 @@ else
                 class="btn btn-outline-primary" name="dechiffrer" id="" value="Déchiffrer">
             </div>
         </form>
+    </div>
+    <div class="col-4 offset-1 ">
+        <h5><?php 
+        if(isset($_POST['dechiffrer']))
+        {
+        echo "Les 5 déchiffrements les plus probables sont :\n";
+        foreach ($results as $i => $result) {
+            echo ($i + 1) . ". Texte: " . $result['text'] . " (Décalage: " . $result['shift'] . ", Score: " . round($result['score'], 4) . ")\n"; ?> <br> <?php
+        }
+    }
+        
+        ?></h5>
     </div>
 </body>
 </html>
